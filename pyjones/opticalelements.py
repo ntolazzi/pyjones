@@ -52,12 +52,12 @@ class JonesMatrix(object):
             raise TypeError('Multiplication does only work for JonesMatrix or JonesVector')
 
 
-class PolarizerHoriontal(JonesMatrix):
+class PolarizerHorizontal(JonesMatrix):
     def __init__(self):
         """This is a subclass of JonesMatrix corresponding to a horizontal polarizer"""
 
         matrix = [[1.0, 0.0], [0.0, 0.0]]
-        super(PolarizerHoriontal, self).__init__(matrix)
+        super(PolarizerHorizontal, self).__init__(matrix)
 
 
 class PolarizerVertical(JonesMatrix):
@@ -74,8 +74,8 @@ class Polarizer(JonesMatrix):
 
         :param angle: Angle of the polarizer with respect to horizontal plane
         """
-
-        matrix = [[], []]
+        angle = np.radians(angle)
+        matrix = [[np.cos(angle), np.sin(angle)], [np.cos(angle), np.sin(angle)]]
         super(Polarizer, self).__init__(matrix)
 
 

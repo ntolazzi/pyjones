@@ -9,6 +9,13 @@ Welcome to PyJones's documentation!
 .. toctree::
    :maxdepth: 2
 
+
+Examples:
+=========
+
+.. include:: example.rst
+
+
 ************
 Jones Vector
 ************

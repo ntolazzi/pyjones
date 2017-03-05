@@ -1,5 +1,6 @@
 """This module provides Jones vectors as a two dimensional representation of the polarization of light.
 The basic class is JonesVector from which all predefined polarizations inherit from. Predefined polarizations are:
+
 * LinearHorizontal
 * LinearVertical
 * LinearDiagonal
@@ -7,6 +8,7 @@ The basic class is JonesVector from which all predefined polarizations inherit f
 * Linear(angle)
 * CircularRight
 * CircularLeft
+
 """
 
 from __future__ import print_function

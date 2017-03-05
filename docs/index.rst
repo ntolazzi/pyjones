@@ -8,13 +8,20 @@ Welcome to PyJones's documentation!
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
 
 
+Jones Vector
+=============
 
-Indices and tables
-==================
+.. automodule:: pyjones.polarizations
 
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+Classes
+-------
+
+.. autoclass:: pyjones.polarizations.JonesVector
+   :members:
+
+.. autoclass:: pyjones.polarizations.LinearHorizontal
+
+Examples
+--------

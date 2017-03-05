@@ -9,19 +9,43 @@ Welcome to PyJones's documentation!
 .. toctree::
    :maxdepth: 2
 
-
+************
 Jones Vector
-=============
+************
 
 .. automodule:: pyjones.polarizations
 
-Classes
--------
+**Base Class**
 
 .. autoclass:: pyjones.polarizations.JonesVector
    :members:
 
+**Predefined Polarizations**
+
 .. autoclass:: pyjones.polarizations.LinearHorizontal
 
-Examples
---------
+.. autoclass:: pyjones.polarizations.LinearVertical
+.. autoclass:: pyjones.polarizations.Linear
+.. autoclass:: pyjones.polarizations.LinearDiagonal
+.. autoclass:: pyjones.polarizations.LinearAntidiagonal
+.. autoclass:: pyjones.polarizations.CircularRight
+.. autoclass:: pyjones.polarizations.CircularLeft
+
+************
+Jones Matrix
+************
+
+.. automodule:: pyjones.opticalelements
+
+**Base Class**
+
+.. autoclass:: pyjones.opticalelements.JonesMatrix
+    :members:
+
+**Predefined Optical Elements**
+
+.. autoclass:: pyjones.opticalelements.PolarizerHorizontal
+.. autoclass:: pyjones.opticalelements.PolarizerVertical
+.. autoclass:: pyjones.opticalelements.Polarizer
+.. autoclass:: pyjones.opticalelements.QuarterWavePlate
+.. autoclass:: pyjones.opticalelements.HalfWavePlate

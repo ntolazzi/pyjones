@@ -62,6 +62,15 @@ class LinearVertical(JonesVector):
 
         super(LinearVertical, self).__init__([0.0, 1.0])
 
+class Linear(JonesVector):
+    def __init__(self, angle):
+        """This is a subclass of JonesVector corresponding to a linear polarization with angle
+
+        :param angle: Angle of the linear polarization with respect to horizontal plane
+        """
+
+        angle = np.radians(angle)
+        super(Linear, self).__init__([np.cos(angle), np.sin(angle)])
 
 class LinearDiagonal(JonesVector):
     def __init__(self):

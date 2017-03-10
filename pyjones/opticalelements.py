@@ -75,7 +75,7 @@ class Polarizer(JonesMatrix):
         :param angle: Angle of the polarizer with respect to horizontal plane
         """
         angle = np.radians(angle)
-        matrix = [[np.cos(angle), np.sin(angle)], [np.cos(angle), np.sin(angle)]]
+        matrix = [[np.cos(angle)**2, np.sin(angle)*np.cos(angle)], [np.sin(angle)*np.cos(angle), np.sin(angle)**2]]
         super(Polarizer, self).__init__(matrix)
 
 
@@ -101,21 +101,7 @@ class HalfWavePlate(JonesMatrix):
         :param angle: Angle of the fast axis of the half wave plate with respect to horizontal plane
         """
 
-        matrix = [[], []]
+        angle = 2*np.radians(angle)
+        matrix = [[np.cos(angle), np.sin(angle)], [np.sin(angle), -np.cos(angle)]]
         super(HalfWavePlate, self).__init__(matrix)
 
-
-if __name__ == '__main__':
-    vec = CircularRight()
-    test_eval_jv = eval(str(vec))
-    print(test_eval_jv)
-    mat = PolarizerHoriontal
-    mat3 = QuarterWavePlate(45)
-    print((mat3 * vec).intensity)
-    import matplotlib.pyplot as plt
-
-    degrees = np.linspace(0, 360, 1000)
-    intensities = [(PolarizerVertical() * QuarterWavePlate(de) * vec).intensity for de
-                   in degrees]
-    plt.plot(degrees, intensities)
-    plt.show()

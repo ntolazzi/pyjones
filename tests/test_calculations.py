@@ -1,5 +1,5 @@
 from pyjones.polarizations import LinearHorizontal as LH
-from pyjones.opticalelements import QuarterWavePlate, PolarizerVertical
+from pyjones.opticalelements import QuarterWavePlate, HalfWavePlate, PolarizerVertical, Polarizer
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -15,3 +15,21 @@ def test_QWP():
     intensities = [(PolarizerVertical() * QuarterWavePlate(angle) * LH()).intensity for angle
                    in angles]
     assert intensities == expected_intensities
+
+def test_HWP():
+    angles = np.linspace(0, 360, 20)
+    expected_intensities = [0.0, 0.37725725642960045, 0.93973687560324448, 0.83864078581287071,
+                            0.22652592093878668, 0.027091379149682623, 0.54128967273616557,
+                            0.99318065170136116, 0.70084771232648502, 0.10542974530180337,
+                            0.10542974530180307, 0.7008477123264838, 0.99318065170136138,
+                            0.54128967273616713, 0.027091379149682925, 0.22652592093878596,
+                            0.83864078581287005, 0.9397368756032457, 0.37725725642960095,
+                            2.3996156522589722e-31]
+    intensities = [(PolarizerVertical() * HalfWavePlate(angle) * LH()).intensity for angle
+                   in angles]
+    assert intensities == expected_intensities
+
+def test_basic_calculation():
+    assert (PolarizerVertical()*Polarizer(45)*LH()).intensity == 0.25
+
+#test_basic_calculation()

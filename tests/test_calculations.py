@@ -32,4 +32,3 @@ def test_HWP():
 def test_basic_calculation():
     assert (PolarizerVertical()*Polarizer(45)*LH()).intensity == 0.25
 
-#test_basic_calculation()

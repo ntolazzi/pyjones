@@ -9,6 +9,15 @@ Welcome to PyJones's documentation!
 .. toctree::
    :maxdepth: 2
 
+The `Jones calculus <https://en.wikipedia.org/wiki/Jones_calculus>`_ is a very convinient form for calculating the polarization of light under the influence of
+polarization changing optical elements. Therefore it is possible to model a whole beampath and find out the final
+polarization after multiple optical elements.
+**PyJones** is ment as an easy interface for these calculations in Python and prvides several predefined polarizations
+and optical elements which are commonly used.
+
+The best way to understand how **PyJones** works is by just going through the examples and see the API. Afterwards it
+is advisable to have a look at the class and module documentation below so you can find out which predefined
+elements exist and how to use them.
 
 Examples:
 =========

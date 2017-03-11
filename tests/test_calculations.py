@@ -1,7 +1,7 @@
-from pyjones.polarizations import LinearHorizontal as LH
-from pyjones.opticalelements import QuarterWavePlate, HalfWavePlate, PolarizerVertical, Polarizer
+from pyjones.polarizations import *
+from pyjones.opticalelements import *
 import numpy as np
-import matplotlib.pyplot as plt
+import pytest
 
 def test_QWP():
     angles = np.linspace(0, 360, 20)
@@ -12,7 +12,7 @@ def test_QWP():
                             0.27064483636808351, 0.013545689574841466, 0.11326296046939295,
                             0.41932039290643497, 0.46986843780162302, 0.18862862821480045,
                             1.1998078261294861e-31]
-    intensities = [(PolarizerVertical() * QuarterWavePlate(angle) * LH()).intensity for angle
+    intensities = [(PolarizerVertical() * QuarterWavePlate(angle) * LinearHorizontal()).intensity for angle
                    in angles]
     assert intensities == expected_intensities
 
@@ -25,10 +25,51 @@ def test_HWP():
                             0.54128967273616713, 0.027091379149682925, 0.22652592093878596,
                             0.83864078581287005, 0.9397368756032457, 0.37725725642960095,
                             2.3996156522589722e-31]
-    intensities = [(PolarizerVertical() * HalfWavePlate(angle) * LH()).intensity for angle
+    intensities = [(PolarizerVertical() * HalfWavePlate(angle) * LinearHorizontal()).intensity for angle
                    in angles]
     assert intensities == expected_intensities
 
-def test_basic_calculation():
-    assert (PolarizerVertical()*Polarizer(45)*LH()).intensity == 0.25
+def test_basic_calculation_vertical():
+    assert (PolarizerVertical()*Polarizer(45)*LinearHorizontal()).intensity == pytest.approx(0.25)
 
+def test_basic_calculation_horizontal():
+    assert (PolarizerHorizontal()*Polarizer(45)*LinearHorizontal()).intensity == pytest.approx(0.25)
+
+def test_wrong_dimension_input_matrix():
+    with pytest.raises(Exception):
+        JonesMatrix([[1, 2], [3, 4], [5, 6]])
+
+def test_wrong_type_input_matrix():
+    with pytest.raises(Exception):
+        JonesMatrix(1)
+
+def test_repr_matrix():
+    matrix = JonesMatrix([[1.0, 1.0], [1.0, 1.0]])
+    repr = str(matrix)
+    assert str(eval(repr)) == str(matrix)
+
+def test_mul_objecterror_matrix():
+    with pytest.raises(Exception):
+        JonesMatrix([[1.0, 1.0], [1.0, 1.0]])*5
+
+def test_wrong_type_vector():
+    with pytest.raises(Exception):
+        JonesVector(3)
+
+def test_wrong_dimension_vector():
+    with pytest.raises(Exception):
+        JonesVector([1, 2, 3])
+
+def test_repr_vector():
+    vector = JonesVector([1.0, 1.0])
+    repr = str(vector)
+    assert str(eval(repr)) == str(vector)
+
+def test_subclasses_vector():
+    assert Linear(45).intensity == pytest.approx(1.0)
+    assert LinearHorizontal().intensity == pytest.approx(1.0)
+    assert LinearVertical().intensity == pytest.approx(1.0)
+    assert LinearDiagonal().intensity == pytest.approx(1.0)
+    assert LinearAntidiagonal().intensity == pytest.approx(1.0)
+    assert CircularRight().intensity == pytest.approx(1.0)
+    assert CircularLeft().intensity == pytest.approx(1.0)

@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>&lt;no title&gt; &#8212; PyJones 0.1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="index.html">
+          <span>PyJones 0.1.0 documentation</span></a></h1>
+        <h2 class="heading"><span>&lt;no title&gt;</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        <a class="uplink" href="index.html">Contents</a>
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <p>The following code snippet shows a classic example of the surprising effects of
+light polarization</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="kn">from</span> <span class="nn">pyjones.polarizations</span> <span class="kn">import</span> <span class="n">LinearHorizontal</span>
+
+<span class="gp">In [2]: </span><span class="kn">from</span> <span class="nn">pyjones.opticalelements</span> <span class="kn">import</span> <span class="n">Polarizer</span><span class="p">,</span> <span class="n">PolarizerVertical</span>
+
+<span class="gp">In [3]: </span><span class="n">input_polarization</span> <span class="o">=</span> <span class="n">LinearHorizontal</span><span class="p">()</span>
+
+<span class="gp">In [4]: </span><span class="n">output_polarization</span> <span class="o">=</span> <span class="n">PolarizerVertical</span><span class="p">()</span><span class="o">*</span><span class="n">input_polarization</span>
+
+<span class="gp">In [5]: </span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;Output: </span><span class="si">%s</span><span class="s2">, Intensity: </span><span class="si">%.2f</span><span class="s2">&quot;</span> <span class="o">%</span><span class="p">(</span><span class="n">output_polarization</span><span class="p">,</span> <span class="n">output_polarization</span><span class="o">.</span><span class="n">intensity</span><span class="p">))</span>
+<span class="go">Output: JonesVector([0j, 0j]), Intensity: 0.00</span>
+</pre></div>
+</div>
+<p>That means the light is perfectly blocked. We now put in one more polarizer:</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [6]: </span><span class="n">output_polarization</span> <span class="o">=</span> <span class="n">PolarizerVertical</span><span class="p">()</span><span class="o">*</span><span class="n">Polarizer</span><span class="p">(</span><span class="mi">45</span><span class="p">)</span><span class="o">*</span><span class="n">input_polarization</span>
+
+<span class="gp">In [7]: </span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;Output: </span><span class="si">%s</span><span class="s2">, Intensity: </span><span class="si">%.2f</span><span class="s2">&quot;</span> <span class="o">%</span><span class="p">(</span><span class="n">output_polarization</span><span class="p">,</span> <span class="n">output_polarization</span><span class="o">.</span><span class="n">intensity</span><span class="p">))</span>
+<span class="go">Output: JonesVector([0j, (0.5+0j)]), Intensity: 0.25</span>
+</pre></div>
+</div>
+<p>That means if we put in one more polarizer in the middle suddenly there is light again.</p>
+<p>You can also use <strong>PyJones</strong> to visualize for example
+<a class="reference external" href="https://en.wikipedia.org/wiki/Polarizer#Malus.27_law_and_other_properties">Malus&#8217; law</a> that states the the
+transmitted intensity of a linear polarized beam trough a polarizer is given by</p>
+<img src="_images/mathmpl/math-02ae23883b.png" class="center" /><p>where <img src="_images/mathmpl/math-5dc8912759.png" style="position: relative; bottom: -3px"/> is the angle between the input polarization and the polarizer.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [8]: </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+
+<span class="gp">In [9]: </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+
+<span class="gp">In [10]: </span><span class="kn">from</span> <span class="nn">pyjones.polarizations</span> <span class="kn">import</span> <span class="n">LinearHorizontal</span>
+
+<span class="gp">In [11]: </span><span class="kn">from</span> <span class="nn">pyjones.opticalelements</span> <span class="kn">import</span> <span class="n">Polarizer</span>
+
+<span class="gp">In [12]: </span><span class="n">angles</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">360</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+
+<span class="gp">In [13]: </span><span class="n">intensities</span> <span class="o">=</span> <span class="p">[(</span><span class="n">Polarizer</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span><span class="o">*</span><span class="n">LinearHorizontal</span><span class="p">())</span><span class="o">.</span><span class="n">intensity</span> <span class="k">for</span> <span class="n">angle</span> <span class="ow">in</span> <span class="n">angles</span><span class="p">]</span>
+
+<span class="gp">In [14]: </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">angles</span><span class="p">,</span> <span class="n">intensities</span><span class="p">);</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/plot_simple.png"><img alt="_images/plot_simple.png" src="_images/plot_simple.png" style="width: 4in;" /></a>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        <a class="uplink" href="index.html">Contents</a>
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017, Nicolas Tolazzi.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.3.
+    </div>
+  </body>
+</html>

@@ -10,7 +10,6 @@ JonesMatrix from which all predefined optical elements inherit from. Predefined 
 """
 
 from __future__ import print_function
-import numpy as np
 from pyjones.polarizations import *
 
 

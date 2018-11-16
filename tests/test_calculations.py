@@ -14,7 +14,7 @@ def test_QWP():
                             1.1998078261294861e-31]
     intensities = [(PolarizerVertical() * QuarterWavePlate(angle) * LinearHorizontal()).intensity for angle
                    in angles]
-    assert intensities == expected_intensities
+    assert np.allclose(intensities, expected_intensities)
 
 def test_HWP():
     angles = np.linspace(0, 360, 20)
@@ -27,7 +27,7 @@ def test_HWP():
                             2.3996156522589722e-31]
     intensities = [(PolarizerVertical() * HalfWavePlate(angle) * LinearHorizontal()).intensity for angle
                    in angles]
-    assert intensities == expected_intensities
+    assert np.allclose(intensities, expected_intensities)
 
 def test_basic_calculation_vertical():
     assert (PolarizerVertical()*Polarizer(45)*LinearHorizontal()).intensity == pytest.approx(0.25)

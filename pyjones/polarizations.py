@@ -16,6 +16,7 @@ import numpy as np
 
 
 class JonesVector(object):
+    eps = 1e-15
 
     def __init__(self, polarization, normalize=True, normal_form=True):
         """This represents a Jones vector and is one representation of the polarisation of light.
@@ -34,6 +35,15 @@ class JonesVector(object):
             self._normalize()
         if normal_form:
             self._make_normal_form()
+        #  truncation for small values
+        for idx, num in enumerate([self.Ex, self.Ey]):
+            new_real = num.real
+            new_imag = num.imag
+            if abs(new_real) < JonesVector.eps:
+                new_real = 0.0
+            if abs(new_imag) < JonesVector.eps:
+                new_imag = 0.0
+            self[idx] = new_real+1j*new_imag
 
     def __repr__(self):
         return 'JonesVector([%s, %s])' % (self.polarization_vector[0, 0], self.polarization_vector[0, 1])

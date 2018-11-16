@@ -60,10 +60,6 @@ def test_wrong_dimension_vector():
     with pytest.raises(Exception):
         JonesVector([1, 2, 3])
 
-def test_repr_vector():
-    vector = JonesVector([1.0, 1.0])
-    repr = str(vector)
-    assert str(eval(repr)) == str(vector)
 
 def test_subclasses_vector():
     assert Linear(45).intensity == pytest.approx(1.0)

@@ -70,6 +70,7 @@ class JonesVector(object):
         self[0] = E_x_new
         self[1] = E_y_new
 
+
     @property
     def intensity(self):
         """Property which returns the intensity of the Jones vector
@@ -96,6 +97,19 @@ class JonesVector(object):
         :rtype: complex
         """
         return self[1]
+
+    @property
+    def Stokes(self):
+        """Property which returns the Stokes parameter representation of the Polarization
+
+        :return: Stokes parameters
+        :rtype: tuple
+        """
+        S0 = self.intensity
+        S1 = np.abs(self.Ex) ** 2 - np.abs(self.Ey) ** 2
+        S2 = 2 * np.real(self.Ex * np.conjugate(self.Ey))
+        S3 = -2 * np.imag(self.Ex * np.conjugate(self.Ey))
+        return S0, S1, S2, S3
 
 
 class LinearHorizontal(JonesVector):

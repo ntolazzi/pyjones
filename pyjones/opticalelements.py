@@ -74,7 +74,8 @@ class Polarizer(JonesMatrix):
         :param angle: Angle of the polarizer with respect to horizontal plane
         """
         angle = np.radians(angle)
-        matrix = [[np.cos(angle)**2, np.sin(angle)*np.cos(angle)], [np.sin(angle)*np.cos(angle), np.sin(angle)**2]]
+        matrix = [[np.cos(angle) ** 2, np.sin(angle) * np.cos(angle)],
+                  [np.sin(angle) * np.cos(angle), np.sin(angle) ** 2]]
         super(Polarizer, self).__init__(matrix)
 
 
@@ -100,21 +101,23 @@ class HalfWavePlate(JonesMatrix):
         :param angle: Angle of the fast axis of the half wave plate with respect to horizontal plane
         """
 
-        angle = 2*np.radians(angle)
+        angle = 2 * np.radians(angle)
         matrix = [[np.cos(angle), np.sin(angle)], [np.sin(angle), -np.cos(angle)]]
         super(HalfWavePlate, self).__init__(matrix)
 
+
 class PhaseRetarder(JonesMatrix):
     def __init__(self, angle, eta):
-        """This is a subclass of JonesMatrix corresponding to a quarter wave plate with angle
+        """This is a subclass of JonesMatrix corresponding to an arbitrary phase retarder with angle
 
-        :param angle: Angle of the fast axis of the quarter wave plate with respect to horizontal plane
+        :param angle: Angle of the fast axis of the phase retarder with respect to horizontal plane
+        :param eta: Phase retardance in degree
         """
 
         angle = np.radians(angle)
         eta = np.radians(eta)
-        matrix = np.exp(- 1.0j * eta / 2.0) * np.matrix([[np.cos(angle) ** 2 + np.exp(1j*eta) * np.sin(angle) ** 2,
-                                                          (1.0 - np.exp(1j*eta)) * np.sin(angle) * np.cos(angle)],
-                                                         [(1.0 - np.exp(1j*eta)) * np.sin(angle) * np.cos(angle),
-                                                          np.sin(angle) ** 2 + np.exp(1j*eta) * np.cos(angle) ** 2]])
+        matrix = np.exp(- 1.0j * eta / 2.0) * np.matrix([[np.cos(angle) ** 2 + np.exp(1j * eta) * np.sin(angle) ** 2,
+                                                          (1.0 - np.exp(1j * eta)) * np.sin(angle) * np.cos(angle)],
+                                                         [(1.0 - np.exp(1j * eta)) * np.sin(angle) * np.cos(angle),
+                                                          np.sin(angle) ** 2 + np.exp(1j * eta) * np.cos(angle) ** 2]])
         super(PhaseRetarder, self).__init__(matrix)

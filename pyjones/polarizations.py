@@ -112,11 +112,11 @@ class JonesVector(object):
         self[0] = E_x_new
         self[1] = E_y_new
 
-    def plot(self, color='r'):
+    def plot(self, color='r', size=10):
         """Visualizes the polarization on the Poincare sphere
 
         """
-        JonesVector.ax.scatter(*self.Stokes[1:], c=color, s=10)
+        JonesVector.ax.scatter(*self.Stokes[1:], c=color, s=size)
 
     @staticmethod
     def show():

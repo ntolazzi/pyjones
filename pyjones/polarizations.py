@@ -12,11 +12,43 @@ The basic class is JonesVector from which all predefined polarizations inherit f
 """
 
 from __future__ import print_function
+
+from mpl_toolkits.mplot3d import Axes3D
+import matplotlib.pyplot as plt
 import numpy as np
+
 
 
 class JonesVector(object):
     eps = 1e-15
+
+    # initialize as class variable to be able to share one Poincare sphere instance
+    fig = plt.figure()
+    ax = fig.add_subplot(111, projection='3d')
+    u = np.linspace(-np.pi, np.pi, 50)
+    v = np.linspace(0, np.pi, 50)
+    x = np.outer(np.cos(u), np.sin(v))
+    y = np.outer(np.sin(u), np.sin(v))
+    z = np.outer(np.ones(np.size(u)), np.cos(v))
+    ax.plot_surface(x, y, z, rstride=5, cstride=5,
+                    color='#c0c0c0', alpha=0.1)
+    ax.plot_wireframe(x, y, z, rstride=5, cstride=5,
+                      color='grey',
+                      alpha=0.2)
+    ax.plot(np.cos(u), np.sin(u), zdir='z', lw=1, color='grey')
+    ax.plot(np.cos(u), np.sin(u), zdir='x', lw=1, color='grey')
+    ax.plot(np.cos(u), np.sin(u), zdir='y', lw=1, color='grey')
+    style = {'fontsize': 16,
+             'horizontalalignment': 'center',
+             'verticalalignment': 'center'}
+    ax.text(0, 1.1, 0, 'D', **style)
+    ax.text(0, -1.1, 0, 'A', **style)
+    ax.text(1.1, 0, 0, 'H', **style)
+    ax.text(-1.1, 0, 0, 'V', **style)
+    ax.text(0, 0, 1.1, 'L', **style)
+    ax.text(0, 0, -1.1, 'R', **style)
+    ax.set_axis_off()
+    ax.set_aspect(0.95)
 
     def __init__(self, polarization, normalize=True, normal_form=True):
         """This represents a Jones vector and is one representation of the polarisation of light.
@@ -79,6 +111,16 @@ class JonesVector(object):
         E_y_new = E_y_abs * np.exp(1j*phi_y_rotated)
         self[0] = E_x_new
         self[1] = E_y_new
+
+    def plot(self, color='r'):
+        """Visualizes the polarization on the Poincare sphere
+
+        """
+        JonesVector.ax.scatter(*self.Stokes[1:], c=color, s=10)
+
+    @staticmethod
+    def show():
+        plt.show()
 
 
     @property

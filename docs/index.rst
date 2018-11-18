@@ -1,8 +1,3 @@
-.. PyJones documentation master file, created by
-   sphinx-quickstart on Sat Mar  4 15:32:11 2017.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
-
 Welcome to PyJones's documentation!
 ===================================
 
@@ -39,7 +34,6 @@ Jones Vector
 **Predefined Polarizations**
 
 .. autoclass:: pyjones.polarizations.LinearHorizontal
-
 .. autoclass:: pyjones.polarizations.LinearVertical
 .. autoclass:: pyjones.polarizations.Linear
 .. autoclass:: pyjones.polarizations.LinearDiagonal
@@ -65,3 +59,4 @@ Jones Matrix
 .. autoclass:: pyjones.opticalelements.Polarizer
 .. autoclass:: pyjones.opticalelements.QuarterWavePlate
 .. autoclass:: pyjones.opticalelements.HalfWavePlate
+.. autoclass:: pyjones.opticalelements.PhaseRetarder

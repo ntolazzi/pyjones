@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='pyjones',
-    version='0.3.0',
+    version='0.4.0',
     description='A package for calculating light polarizations',
     author='Nicolas Tolazzi',
     author_email='nicolas.tolazzi@googlemail.com',
@@ -13,6 +13,5 @@ setup(
     classifiers=[
         'Development Status :: 4 - Beta',
         'License :: OSI Approved :: MIT License',
-        'Programming Language :: Python :: 2',
         'Programming Language :: Python :: 3']
 )

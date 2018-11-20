@@ -48,7 +48,9 @@ where :math:`\theta` is the angle between the input polarization and the polariz
 
     In [6]: intensities = [(Polarizer(angle)*LinearHorizontal()).intensity for angle in angles]
 
+    In [7]: plt.figure()
+
     @savefig plot_simple.png width=4in
-    In [7]: plt.plot(angles, intensities);
+    In [8]: plt.plot(angles, intensities);
 
 

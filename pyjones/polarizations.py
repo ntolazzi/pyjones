@@ -18,11 +18,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
-
-class JonesVector(object):
-    eps = 1e-15
-
-    # initialize as class variable to be able to share one Poincare sphere instance
+def get_Poincare_sphere():
     fig = plt.figure()
     ax = fig.add_subplot(111, projection='3d')
     u = np.linspace(-np.pi, np.pi, 50)
@@ -49,6 +45,15 @@ class JonesVector(object):
     ax.text(0, 0, -1.1, 'R', **style)
     ax.set_axis_off()
     ax.set_aspect(0.95)
+    return ax
+
+
+def show_plots():
+    plt.show()
+
+
+class JonesVector(object):
+    eps = 1e-15
 
     def __init__(self, polarization, normalize=True, normal_form=True):
         """This represents a Jones vector and is one representation of the polarisation of light.
@@ -112,16 +117,11 @@ class JonesVector(object):
         self[0] = E_x_new
         self[1] = E_y_new
 
-    def plot(self, color='r', size=10):
+    def plot(self, poincare_sphere_axis, color='r', size=10):
         """Visualizes the polarization on the Poincare sphere
 
         """
-        JonesVector.ax.scatter(*self.Stokes[1:], c=color, s=size)
-
-    @staticmethod
-    def show():
-        plt.show()
-
+        poincare_sphere_axis.scatter(*self.Stokes[1:], c=color, s=size)
 
     @property
     def intensity(self):

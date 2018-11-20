@@ -19,6 +19,10 @@ import numpy as np
 
 
 def get_Poincare_sphere():
+    """Sets up a figure and a matplotlib axes instance with a Poincare sphere on which a polarization can be plotted
+
+    :return: matplotlib.ax
+    """
     fig = plt.figure()
     ax = fig.add_subplot(111, projection='3d')
     u = np.linspace(-np.pi, np.pi, 50)
@@ -49,6 +53,9 @@ def get_Poincare_sphere():
 
 
 def show_plots():
+    """Invokes the interactive plotting window
+
+    """
     plt.show()
 
 

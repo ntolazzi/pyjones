@@ -48,7 +48,30 @@ where :math:`\theta` is the angle between the input polarization and the polariz
 
     In [6]: intensities = [(Polarizer(angle)*LinearHorizontal()).intensity for angle in angles]
 
-    @savefig plot_simple.png width=4in
-    In [7]: plt.plot(angles, intensities);
+    In [7]: plt.figure()
 
+    @savefig plot_simple.png width=4in
+    In [8]: plt.plot(angles, intensities);
+
+
+It is also possible to plot the polarization of a Jones vector on
+the  `Poincare sphere <https://en.wikipedia.org/wiki/Polarization_(waves)#Poincar%C3%A9_sphere>`_:
+
+.. ipython::
+    @savefig
+
+    In [9]: import pyjones
+
+    In [10]: from pyjones.polarizations import LinearHorizontal
+
+    In [11]: from pyjones.opticalelements import HalfWavePlate, QuarterWavePlate
+
+    In [12]: import numpy as np
+
+    In [13]: ps = pyjones.polarizations.get_Poincare_sphere()
+
+    @savefig plot_poincare.png width=8in
+    In [109]: for angle in np.linspace(0, 360, 50):
+       .....:     pol = QuarterWavePlate(angle) * LinearHorizontal()
+       .....:     pol.plot(ps, color='r')
 

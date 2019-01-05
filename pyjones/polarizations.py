@@ -49,7 +49,7 @@ def get_Poincare_sphere():
     ax.text(0, 0, -1.1, 'R', **style)
     ax.set_axis_off()
     ax.set_aspect(0.95)
-    return ax
+    return fig, ax
 
 
 def show_plots():

@@ -3,8 +3,8 @@ from pyjones.polarizations import LinearHorizontal
 from pyjones.opticalelements import HalfWavePlate, QuarterWavePlate
 import numpy as np
 
-ps = pyjones.polarizations.get_Poincare_sphere()
-ps2 = pyjones.polarizations.get_Poincare_sphere()
+fig1, ps = pyjones.polarizations.get_Poincare_sphere()
+fig2, ps2 = pyjones.polarizations.get_Poincare_sphere()
 
 
 # plot QWP
